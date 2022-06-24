@@ -1,13 +1,8 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
-import { withTheme } from '@material-ui/core';
+import React, { FunctionComponent, useState } from 'react';
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
-import map from 'lodash/map';
-import styled from 'styled-components';
 
 import { FilterSelect } from '../components/filter_select/FilterSelect';
+import { Title } from '../components/title/Title';
 
 import { AllAircraft } from './AllAircraft';
 import { MatchedModels } from './MatchedModels';
@@ -20,15 +15,17 @@ interface HomeProps {
 /**
  * Main Home page displays tables based on the selected filter value
  */
-const UnstyledHome: FunctionComponent<HomeProps> = ({ className }) => {
+export const Home: FunctionComponent<HomeProps> = ({ className }) => {
   const [filter, setFilter] = useState('All Data');
 
   return (
     <Box className={className}>
+      <Title />
+
       <FilterSelect
         filter={filter}
-        onChange={(filter: string) => {
-          setFilter(filter);
+        onChange={(input: string) => {
+          setFilter(input);
         }}
       />
       {filter === 'All Data' && <AllAircraft />}
@@ -37,5 +34,3 @@ const UnstyledHome: FunctionComponent<HomeProps> = ({ className }) => {
     </Box>
   );
 };
-
-export const Home = withTheme(styled(UnstyledHome)``);

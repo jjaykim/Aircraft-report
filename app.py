@@ -43,7 +43,7 @@ class Aircraft(Base):
   atct_weight_class = Column(Text)
   
   def __repr__(self):
-    return '' % self.date_completed % self.manufacturer % self.model % self.atct_weight_class
+    return '' %self.id % self.date_completed % self.manufacturer % self.model % self.atct_weight_class
 
 # Schema Objects
 '''
@@ -66,7 +66,7 @@ class Query(graphene.ObjectType):
   matched_atct_weight = graphene.List(AircraftObject, weight=graphene.String())
   
   def resolve_all_aircraft(self, info):
-    return AircraftObject.get_query(info).order_by(desc(Aircraft.model)).all()
+    return AircraftObject.get_query(info).all()
 
   def resolve_matched_models(self, info, input):
     query = AircraftObject.get_query(info)

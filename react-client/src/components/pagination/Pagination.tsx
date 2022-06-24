@@ -8,6 +8,7 @@ import ArrowForwardIos from '@material-ui/icons/ArrowForwardIos';
 interface PaginationProps {
   className?: string;
   totalLength: number;
+  // eslint-disable-next-line no-unused-vars
   onChange: (pageNum: number) => Promise<void>;
   activePage: number;
   rowsPerPage: number;

@@ -32,10 +32,25 @@ const UnstyledTable: FunctionComponent<TableProps> = ({
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(15);
 
+  useEffect(() => {
+    setOrder('desc');
+    setSelectColumn('');
+    setColumn(TableHeaderData);
+    setRowsPerPage(15);
+  }, []);
+
   const newOrder: AircraftType[] = useMemo(() => {
     const data = { ...rowData };
 
-    return orderBy(data, [selectColumn], [order]);
+    let orderedData;
+
+    if (selectColumn.length > 0) {
+      orderedData = orderBy(data, [selectColumn], [order]);
+    } else {
+      orderedData = rowData;
+    }
+
+    return orderedData;
   }, [rowData, selectColumn, order]);
 
   const handlePageChange = (pageNum: number) => {
@@ -66,8 +81,10 @@ const UnstyledTable: FunctionComponent<TableProps> = ({
               justifyContent="center"
               alignItems="center"
               onClick={() => {
-                setOrder(order === 'desc' ? 'asc' : 'desc');
-                setSelectColumn(column[idx]);
+                if (idx !== 0) {
+                  setOrder(order === 'desc' ? 'asc' : 'desc');
+                  setSelectColumn(column[idx - 1]);
+                }
               }}
             >
               {headerText}

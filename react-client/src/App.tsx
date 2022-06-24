@@ -38,25 +38,10 @@ const App: FunctionComponent = () => {
         <Box position="relative" minHeight="100vh" mx="14rem">
           <BrowserRouter>
             <Switch>
-              <>
-                <Box pt="3rem" pb="2rem" display="flex" justifyContent="center">
-                  <Box
-                    className="boldText"
-                    fontSize="h4.fontSize"
-                    letterSpacing={4}
-                  >
-                    Aircraft 🛩
-                  </Box>
-                </Box>
-
-                <Box>
-                  <Route exact path="/">
-                    <Home />
-                  </Route>
-
-                  <Route component={NotFound} />
-                </Box>
-              </>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route component={NotFound} path="*" />
             </Switch>
           </BrowserRouter>
         </Box>

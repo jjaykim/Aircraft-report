@@ -1,4 +1,3 @@
-/* eslint-disable no-void */
 import React, { FunctionComponent, ChangeEvent } from 'react';
 import withTheme from '@material-ui/core/styles/withTheme';
 import styled from 'styled-components';
@@ -15,7 +14,8 @@ import { SelectionType } from '../../types/filter.type';
 interface FilterProps {
   className?: string;
   filter: string;
-  onChange: (filter: string) => Promise<void>;
+  // eslint-disable-next-line no-unused-vars
+  onChange: (input: string) => Promise<void>;
 }
 
 const UnstyledFilterSelect: FunctionComponent<FilterProps> = ({
@@ -31,7 +31,7 @@ const UnstyledFilterSelect: FunctionComponent<FilterProps> = ({
         id="select"
         value={filter}
         onChange={(evt: ChangeEvent<{ value: unknown }>) => {
-          void onChange(evt.target.value as string);
+          onChange(evt.target.value as string);
         }}
       >
         {map(SelectionType, (value, idx) => (

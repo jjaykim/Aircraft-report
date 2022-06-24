@@ -61,7 +61,6 @@
       }
     ],
     "no-shadow": "off",
-    "no-unused-vars": "off",
     "react/require-default-props": "off",
     "no-plusplus": "off",
     "react/jsx-no-constructed-context-values": "off"
