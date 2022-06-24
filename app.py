@@ -7,13 +7,13 @@ from flask import Flask
 from flask_graphql import GraphQLView
 
 # DB
-from sqlalchemy import create_engine, desc, inspect, Column, Integer, Text
+from sqlalchemy import create_engine, inspect, Column, Integer, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # graphene
 import graphene
-from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
+from graphene_sqlalchemy import SQLAlchemyObjectType
 
 load_dotenv()
 
