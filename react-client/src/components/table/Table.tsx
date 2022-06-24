@@ -40,12 +40,10 @@ const UnstyledTable: FunctionComponent<TableProps> = ({
   }, []);
 
   const newOrder: AircraftType[] = useMemo(() => {
-    const data = { ...rowData };
-
-    let orderedData;
+    let orderedData = { ...rowData };
 
     if (selectColumn.length > 0) {
-      orderedData = orderBy(data, [selectColumn], [order]);
+      orderedData = orderBy(orderedData, [selectColumn], [order]);
     } else {
       orderedData = rowData;
     }

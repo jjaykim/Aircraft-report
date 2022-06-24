@@ -4,7 +4,6 @@ import React, {
   ChangeEvent,
   useMemo,
   useContext,
-  useEffect,
 } from 'react';
 import { useQuery } from '@apollo/client';
 import Box from '@material-ui/core/Box';
@@ -36,12 +35,6 @@ export const MatchedModels: FunctionComponent = () => {
       variables: { input: userInput },
     }
   );
-
-  useEffect(() => {
-    if (viewer.aircraft) {
-      setMatchedModels(viewer.aircraft);
-    }
-  }, []);
 
   const serachingModel = debounce((value: string) => {
     setUserInput(value);

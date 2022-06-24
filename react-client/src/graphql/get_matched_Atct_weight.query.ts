@@ -13,10 +13,10 @@ export interface MatchedAtctWeightVariable {
 }
 
 /**
- * Query for matching model Data
+ * Query for matching ATCT Weight Class Data
  */
-export const GET_ATCT_WEIGHT = gql`
-  query matchedAtctWeight ($weight: String!) {
+export const GET_MATCHED_ATCT_WEIGHT = gql`
+  query matchedAtctWeight ($weight: String) {
     matchedAtctWeight (weight: $weight) {
       ${AIRCRAFT_FRAGMENT}
     }

@@ -13,7 +13,7 @@ export interface MatchedModelsVariable {
 }
 
 /**
- * Query for matching ATCT Weight Class Data
+ * Query for matching model Data
  */
 export const GET_MATCHEDMODELS = gql`
   query matchedModels ($input: String) {

@@ -1,6 +1,5 @@
 import React, {
   FunctionComponent,
-  useEffect,
   useState,
   useContext,
   useMemo,
@@ -13,7 +12,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import map from 'lodash/map';
 
 import {
-  GET_ATCT_WEIGHT,
+  GET_MATCHED_ATCT_WEIGHT,
   MatchedAtctWeightData,
   MatchedAtctWeightVariable,
 } from '../graphql/get_matched_Atct_weight.query';
@@ -27,22 +26,15 @@ import { TableViewerContext } from '../context/tableViewer';
  */
 export const MatchedWeight: FunctionComponent = () => {
   const { viewer } = useContext(TableViewerContext);
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState('All');
 
   const [matchedAtctWeight, setMatchedAtctWeight] = useState<AircraftType[]>();
   const matchedAtctWeightQuery = useQuery<
     MatchedAtctWeightData,
     MatchedAtctWeightVariable
-  >(GET_ATCT_WEIGHT, {
+  >(GET_MATCHED_ATCT_WEIGHT, {
     variables: { weight: userInput },
   });
-
-  useEffect(() => {
-    if (viewer.aircraft) {
-      setMatchedAtctWeight(viewer.aircraft);
-      setUserInput('All');
-    }
-  }, []);
 
   const handleClick = useCallback((item: string) => {
     setUserInput(item);
@@ -54,7 +46,7 @@ export const MatchedWeight: FunctionComponent = () => {
     } else if (matchedAtctWeightQuery.data) {
       setMatchedAtctWeight(matchedAtctWeightQuery.data.matchedAtctWeight);
     }
-  }, [matchedAtctWeightQuery]);
+  }, [userInput, matchedAtctWeightQuery]);
 
   if (!matchedAtctWeight) {
     <div>Loading...</div>;
@@ -82,7 +74,9 @@ export const MatchedWeight: FunctionComponent = () => {
       <Table
         TableHeader={viewer.tableHeader}
         TableFlex={viewer.tableFlex}
-        rowData={matchedAtctWeight!}
+        rowData={
+          matchedAtctWeight === undefined ? viewer.aircraft : matchedAtctWeight
+        }
         subTitle={`Successfully total ${matchedAtctWeight?.length} of models was found!`}
       />
     </Box>
