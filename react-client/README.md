@@ -25,3 +25,11 @@ https://user-images.githubusercontent.com/47313362/175657099-84e83dbb-9bf0-4dc9-
   - Since there are many overlapping values of ATCT Weight Class, it has been implemented so that the user can select it.
 
 https://user-images.githubusercontent.com/47313362/175657049-bdabd2fc-52f0-417d-bd78-8a2543808254.mov
+
+# 404 NotFound Page
+  - If the user try to reach a route that does not exist, a 404 error message is displayed
+  - When the user click the `GO TO HOME` button, redirected to the home page
+
+https://user-images.githubusercontent.com/47313362/175665823-f7d53fc7-198e-4063-a1f4-24890cc22973.mov
+
+
