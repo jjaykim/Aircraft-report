@@ -52,7 +52,6 @@ Schemas are used to describe data
 class AircraftObject(SQLAlchemyObjectType):
   class Meta:
     model = Aircraft
-    interfaces = (graphene.relay.Node, )
 
 # Query
   '''
@@ -60,10 +59,22 @@ class AircraftObject(SQLAlchemyObjectType):
   Relay allows users to retrieve only the data they need through queries in predefined data structures.
   '''
 class Query(graphene.ObjectType):
-  node = graphene.relay.Node.Field()
   all_aircraft = graphene.List(AircraftObject)
   matched_models = graphene.List(AircraftObject, input=graphene.String())
   matched_atct_weight = graphene.List(AircraftObject, weight=graphene.String())
+  
+  aircraft_query = graphene.List(AircraftObject, model=graphene.String(), weight=graphene.String(), default=graphene.String(default_value="default"))
+  
+  def resolve_aircraft_query(self, info, **kwargs):
+    model = kwargs.get('model')
+    weight = kwargs.get('weight')
+    
+    query = AircraftObject.get_query(info)
+    
+    if model is not None or weight is not None :
+      return query.filter((Aircraft.atct_weight_class == weight) | (Aircraft.model == model)).all()
+    
+    return query.all()
   
   def resolve_all_aircraft(self, info):
     return AircraftObject.get_query(info).all()
